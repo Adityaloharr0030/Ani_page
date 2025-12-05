@@ -1,0 +1,22 @@
+/* Professional Theme Pack */ 
+.theme-github-dark { 
+  --bg-primary: #0d1117; --text-primary: #f0f6fc; 
+  --accent: #58a6ff; --border: #30363d; 
+} 
+.theme-vscode-purple { 
+  --bg-primary: #1e1e2e; --text-primary: #cdd6f4; 
+  --accent: #b4befe; --border: #45475a; 
+} 
+.theme-dracula { 
+  --bg-primary: #282a36; --text-primary: #f8f8f2; 
+  --accent: #ff79c6; --border: #44475a; 
+} 
+.theme-nord { 
+  --bg-primary: #2e3440; --text-primary: #d8dee9; 
+  --accent: #5e81ac; --border: #3b4252; 
+} 
+.theme-monokai { 
+  --bg-primary: #272822; --text-primary: #f8f8f2; 
+  --accent: #a6e22e; --border: #49483e; 
+} 
+

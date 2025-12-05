@@ -1,0 +1,15 @@
+{
+  "id": "cf63b01d-bff8-43d0-96ab-64e69a5eecb8",
+  "projectName": "persistence-smoke-test-2",
+  "receivedAt": "2025-11-15T06:40:59.638Z",
+  "files": [
+    {
+      "name": "a.txt",
+      "size": 19
+    }
+  ],
+  "totalFiles": 1,
+  "totalChars": 19,
+  "checksum": "3fff3fa57407d0d3dda9df9f4e279de866b53aa728a284084625000a23b33e67",
+  "ipHash": "eff8e7ca506627fe"
+}

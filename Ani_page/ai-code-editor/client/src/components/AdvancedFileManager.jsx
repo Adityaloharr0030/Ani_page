@@ -1,0 +1,194 @@
+import React, { useState, useRef } from 'react';
+
+export default function AdvancedFileManager({ files, activeFileId, onFileSelect, onFileAdd, onFileDelete, onFileRename }) {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isDragging, setIsDragging] = useState(false);
+  const [renamingId, setRenamingId] = useState(null);
+  const [renamingValue, setRenamingValue] = useState('');
+  const fileInputRef = useRef(null);
+
+  const filteredFiles = files.filter(file =>
+    file.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleFileUpload = (event) => {
+    const uploadedFile = event.target.files[0];
+    if (uploadedFile) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const newFile = {
+          id: Date.now().toString(),
+          name: uploadedFile.name,
+          language: getLanguageFromExt(uploadedFile.name),
+          content: e.target.result
+        };
+        onFileAdd(newFile);
+      };
+      reader.readAsText(uploadedFile);
+    }
+  };
+
+  const getLanguageFromExt = (filename) => {
+    const ext = filename.split('.').pop().toLowerCase();
+    const map = {
+      'js': 'javascript', 'jsx': 'javascript',
+      'html': 'html',
+      'css': 'css',
+      'json': 'json',
+      'sql': 'sql',
+      'md': 'markdown'
+    };
+    return map[ext] || 'text';
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const droppedFile = e.dataTransfer.files[0];
+    if (droppedFile) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const newFile = {
+          id: Date.now().toString(),
+          name: droppedFile.name,
+          language: getLanguageFromExt(droppedFile.name),
+          content: event.target.result
+        };
+        onFileAdd(newFile);
+      };
+      reader.readAsText(droppedFile);
+    }
+  };
+
+  const startRename = (file) => {
+    setRenamingId(file.id);
+    setRenamingValue(file.name);
+  };
+
+  const finishRename = () => {
+    if (renamingId && renamingValue.trim()) {
+      onFileRename(renamingId, renamingValue.trim());
+    }
+    setRenamingId(null);
+    setRenamingValue('');
+  };
+
+  return (
+    <div className="file-manager advanced">
+      <div className="fm-header">
+        <h3>Files</h3>
+        <div className="fm-actions">
+          <button data-testid="new-file-btn" onClick={() => onFileAdd({ id: Date.now().toString(), name: 'untitled.js', language: 'javascript', content: '' })} title="New File">+</button>
+          <button data-testid="import-file-btn" onClick={() => fileInputRef.current.click()} title="Import File">↑</button>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileUpload}
+            style={{ display: 'none' }}
+          />
+        </div>
+      </div>
+
+      <div className="fm-search">
+        <input
+          type="text"
+          placeholder="Search files..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
+      <div
+        className={`fm-list ${isDragging ? 'dragging' : ''}`}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+      >
+        {filteredFiles.map(file => (
+          <div
+            key={file.id}
+            className={`fm-item ${file.id === activeFileId ? 'active' : ''}`}
+            onClick={() => onFileSelect(file.id)}
+            onDoubleClick={(e) => {
+              e.stopPropagation();
+              startRename(file);
+            }}
+            title="Double-click to rename"
+          >
+            <span className="file-icon">{getFileIcon(file.language)}</span>
+            {renamingId === file.id ? (
+              <input
+                type="text"
+                value={renamingValue}
+                onChange={(e) => setRenamingValue(e.target.value)}
+                onBlur={finishRename}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') finishRename();
+                  if (e.key === 'Escape') {
+                    setRenamingId(null);
+                    setRenamingValue('');
+                  }
+                }}
+                onClick={(e) => e.stopPropagation()}
+                autoFocus
+                className="file-name-input"
+              />
+            ) : (
+              <span className="file-name">{file.name}</span>
+            )}
+            <div className="file-actions">
+              <button
+                data-testid="rename-file-btn"
+                className="file-action rename"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  startRename(file);
+                }}
+                title="Rename"
+              >
+                ✏️
+              </button>
+              <button
+                data-testid="delete-file-btn"
+                className="file-action delete"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onFileDelete(file.id);
+                }}
+                title="Delete"
+              >
+                🗑️
+              </button>
+            </div>
+          </div>
+        ))}
+        {filteredFiles.length === 0 && (
+          <div className="fm-empty">
+            {searchTerm ? 'No matches found' : 'Drag files here'}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function getFileIcon(lang) {
+  switch (lang) {
+    case 'html': return '🌐';
+    case 'css': return '🎨';
+    case 'javascript': return '📜';
+    case 'json': return '📋';
+    case 'sql': return '🗄️';
+    case 'markdown': return '📝';
+    default: return '📄';
+  }
+}

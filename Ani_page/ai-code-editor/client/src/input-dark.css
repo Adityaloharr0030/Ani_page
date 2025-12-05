@@ -1,0 +1,186 @@
+/* Universal Input Styling - Dark Theme */
+input[type="text"],
+input[type="search"],
+textarea,
+.prompt-input,
+.terminal-input {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(124, 58, 237, 0.3) !important;
+    border-radius: 6px !important;
+    color: #f0f4ff !important;
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+    transition: all 0.2s !important;
+}
+
+input[type="text"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+.prompt-input:focus,
+.terminal-input:focus {
+    outline: none !important;
+    border-color: #7c3aed !important;
+    background: rgba(124, 58, 237, 0.1) !important;
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2) !important;
+}
+
+input[type="text"]::placeholder,
+input[type="search"]::placeholder,
+textarea::placeholder {
+    color: rgba(197, 207, 232, 0.5) !important;
+}
+
+/* File Explorer Header Buttons */
+.file-explorer button,
+.file-explorer .explorer-header,
+button:not(.btn):not(.prompt-send):not(.panel-btn):not(.modal-close) {
+    background: rgba(124, 58, 237, 0.15) !important;
+    border: 1px solid rgba(124, 58, 237, 0.3) !important;
+    border-radius: 6px !important;
+    color: #f0f4ff !important;
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+.file-explorer button:hover,
+button:not(.btn):not(.prompt-send):not(.panel-btn):not(.modal-close):hover {
+    background: rgba(124, 58, 237, 0.25) !important;
+    border-color: #7c3aed !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3) !important;
+}
+
+/* AI Assistant Styling */
+.ai-assistant {
+    background: rgba(17, 28, 68, 0.85) !important;
+    border-radius: 8px !important;
+    padding: 16px !important;
+}
+
+.ai-assistant .mode-buttons {
+    display: flex !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+    margin-bottom: 16px !important;
+}
+
+.ai-assistant .mode-buttons button {
+    flex: 1 !important;
+    min-width: 80px !important;
+    height: 36px !important;
+    background: rgba(124, 58, 237, 0.15) !important;
+    border: 1px solid rgba(124, 58, 237, 0.3) !important;
+    border-radius: 6px !important;
+    color: #c5cfe8 !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+}
+
+.ai-assistant .mode-buttons button:hover {
+    background: rgba(124, 58, 237, 0.25) !important;
+    border-color: #7c3aed !important;
+    color: #f0f4ff !important;
+}
+
+.ai-assistant .mode-buttons button.active {
+    background: linear-gradient(135deg, #7c3aed, #3b82f6) !important;
+    border-color: #7c3aed !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4) !important;
+}
+
+.ai-assistant select {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(124, 58, 237, 0.3) !important;
+    border-radius: 6px !important;
+    color: #f0f4ff !important;
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+}
+
+.ai-assistant textarea {
+    min-height: 80px !important;
+}
+
+.terminal-action {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.terminal-action:hover {
+    background: rgba(124, 58, 237, 0.12);
+    color: var(--text-primary);
+}
+
+/* File Actions (Rename/Delete) */
+.file-actions {
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.fm-item:hover .file-actions {
+    opacity: 1;
+}
+
+.file-action {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.file-action:hover {
+    background: rgba(124, 58, 237, 0.12);
+    color: var(--text-primary);
+}
+
+.file-action.delete:hover {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+/* Dark Ocean API Key Inputs */
+.ai-assistant input[type="password"],
+.ai-assistant input[type="text"] {
+    background: rgba(10, 25, 47, 0.8) !important;
+    border: 1px solid rgba(8, 145, 178, 0.3) !important;
+    color: #e0f2fe !important;
+}
+
+.ai-assistant input[type="password"]:focus,
+.ai-assistant input[type="text"]:focus {
+    border-color: #0891b2 !important;
+    background: rgba(10, 25, 47, 0.95) !important;
+    box-shadow: 0 0 0 2px rgba(8, 145, 178, 0.2) !important;
+}
+
+.ai-assistant input[type="password"]::placeholder,
+.ai-assistant input[type="text"]::placeholder {
+    color: rgba(224, 242, 254, 0.4) !important;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.backup
+*.env.backup
+
+# Build outputs
+dist/
+build/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.sqlite
+*.db
+*.swp
+*.swo
+*~
+
+# Cache
+.cache/
+.parcel-cache/
+.vite/
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+*.pid
+*.seed
+*.pid.lock

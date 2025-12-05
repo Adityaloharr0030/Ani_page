@@ -1,0 +1,43 @@
+{
+  "name": "tools",
+  "version": "2.0.0",
+  "description": "AI Code Editor Tools and Utilities",
+  "main": "api-key-tester.js",
+  "scripts": {
+    "test": "npm run test:server && npm run test:tools",
+    "test:server": "cd ai-code-editor/server && npm test",
+    "test:tools": "node api-key-tester.js --help > /dev/null && node test-server-api.js --help > /dev/null || true",
+    "check": "node check-project.js",
+    "setup": "node setup-env.js",
+    "start": "npm run dev",
+    "start:server": "cd ai-code-editor/server && node server.js",
+    "start:client": "cd ai-code-editor/client && npm run dev",
+    "build": "cd ai-code-editor/client && npm run build",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd ai-code-editor/server && node server.js",
+    "client": "cd ai-code-editor/client && npm run dev",
+    "both": "start \"Backend\" cmd /k \"npm run server\" && timeout /t 5 && start \"Frontend\" cmd /k \"npm run client\"",
+    "install:all": "npm install && cd ai-code-editor/server && npm install && cd ../client && npm install"
+  },
+  "keywords": [
+    "ai",
+    "code-editor",
+    "openai",
+    "perplexity",
+    "development-tools"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "axios": "^1.13.2",
+    "node-cache": "^5.1.2"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}
